@@ -19,4 +19,6 @@ urlpatterns = [
         views.get_submission_by_pk, name='get_submission_by_pk'),
     url(r'^challenge/(?P<challenge_pk>[0-9]+)/update_submission/$',
         views.update_submission, name='update_submission'),
+    url(r'^submission_files/$',
+        views.get_signed_url, name='get_signed_url_for_submission_related_file'),
 ]

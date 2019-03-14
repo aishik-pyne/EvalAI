@@ -37,7 +37,8 @@ from hosts.utils import is_user_a_host_of_challenge
 from jobs.constants import submission_status_to_exclude
 from participants.models import (ParticipantTeam,)
 from participants.utils import (
-    get_participant_team_id_of_user_for_a_challenge,)
+    get_participant_team_id_of_user_for_a_challenge,
+    is_user_part_of_participant_team,)
 
 from .models import Submission
 from .sender import publish_submission_message
@@ -753,7 +754,7 @@ def update_submission(request, challenge_pk):
 @throttle_classes([UserRateThrottle])
 @permission_classes((permissions.IsAuthenticated, HasVerifiedEmail))
 @authentication_classes((ExpiringTokenAuthentication,))
-def get_submission_related_files(request):
+def get_signed_url(request):
     '''Returns S3 signed URL for a particular file residing on S3 bucket
 
     Arguments:
